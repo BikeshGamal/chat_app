@@ -11,6 +11,9 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text("chat app")
+      ),
       body:SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(12.0),
