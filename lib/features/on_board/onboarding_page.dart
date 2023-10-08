@@ -1,18 +1,23 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:introduction_screen/introduction_screen.dart';
+
+import '../../bottom_navigation.dart';
 class OnBoardingPage extends StatefulWidget {
   const OnBoardingPage({Key? key}) : super(key: key);
   @override
   OnBoardingPageState createState() => OnBoardingPageState();
 }
+
 class OnBoardingPageState extends State<OnBoardingPage> {
   final introKey = GlobalKey<IntroductionScreenState>();
+
   void _onIntroEnd(context) {
     Navigator.of(context).pushReplacement(
       MaterialPageRoute(builder: (_) => const HomePage()),
     );
   }
+
   Widget _buildFullscreenImage() {
     return Image.asset(
       'assets/flutter.png',
@@ -49,7 +54,6 @@ class OnBoardingPageState extends State<OnBoardingPage> {
         child: SafeArea(
           child: Padding(
             padding: const EdgeInsets.only(top: 16, right: 16),
-            child: _buildImage('flutter.png', 100),
           ),
         ),
       ),
@@ -66,82 +70,37 @@ class OnBoardingPageState extends State<OnBoardingPage> {
       ),
       pages: [
         PageViewModel(
-          title: "Fractional shares",
+          title: "Network",
           body:
-          "Instead of having to buy an entire share, invest any amount you want.",
+          "The network infrastructure of a chat app plays a crucial "
+              "role in ensuring that messages are sent and received reliably ",
           image: _buildImage('intro1.png'),
           decoration: pageDecoration,
         ),
         PageViewModel(
-          title: "Learn as you go",
+          title: "Chat",
           body:
-          "Download the Stockpile app and master the market with our mini-lesson.",
+          "The chat feature in a chat app is the core functionality that allows users to"
+              " send and receive messages in real-time or near real-time.",
           image: _buildImage('intro2.png'),
           decoration: pageDecoration,
         ),
+
         PageViewModel(
-          title: "Kids and teens",
+          title: "Email",
           body:
-          "Kids and teens can track their stocks 24/7 and place trades that you approve.",
+          "Integrating an email feature into a chat app can provide "
+              "users with a unified communication platform ",
           image: _buildImage('intro3.png'),
           decoration: pageDecoration,
         ),
         PageViewModel(
-          title: "Full Screen Page",
+          title: "Phone",
           body:
-          "Pages can be full screen as well.\n\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc id euismod lectus, non tempor felis. Nam rutrum rhoncus est ac venenatis.",
-          image: _buildFullscreenImage(),
-          decoration: pageDecoration.copyWith(
-            contentMargin: const EdgeInsets.symmetric(horizontal: 16),
-            fullScreen: true,
-            bodyFlex: 2,
-            imageFlex: 3,
-            safeArea: 100,
-          ),
-        ),
-        PageViewModel(
-          title: "Another title page",
-          body: "Another beautiful body text for this example onboarding",
-          image: _buildImage('intro2.png'),
-          footer: ElevatedButton(
-            onPressed: () {
-              introKey.currentState?.animateScroll(0);
-            },
-            style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.lightBlue,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(8.0),
-              ),
-            ),
-            child: const Text(
-              'FooButton',
-              style: TextStyle(color: Colors.white),
-            ),
-          ),
-          decoration: pageDecoration.copyWith(
-            bodyFlex: 6,
-            imageFlex: 6,
-            safeArea: 80,
-          ),
-        ),
-        PageViewModel(
-          title: "Title of last page - reversed",
-          bodyWidget:  Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text("Click on ", style: bodyStyle),
-              Icon(Icons.edit),
-              Text(" to edit a post", style: bodyStyle),
-            ],
-          ),
-          decoration: pageDecoration.copyWith(
-            bodyFlex: 2,
-            imageFlex: 4,
-            bodyAlignment: Alignment.bottomCenter,
-            imageAlignment: Alignment.topCenter,
-          ),
-          image: _buildImage('intro1.png'),
-          reverse: true,
+          "Integrating a phone feature into a chat app allows users to make voice"
+              " and video calls directly from the app",
+          image: _buildImage('intro4.png'),
+          decoration: pageDecoration,
         ),
       ],
       onDone: () => _onIntroEnd(context),
@@ -183,9 +142,13 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('Home')),
-      body: const Center(child: Text("This is the screen after Introduction")),
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'Flutter Demo',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: BottomNavigation(),
     );
   }
 }
